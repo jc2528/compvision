@@ -17,13 +17,6 @@ def split_RGB(img):
  				else:
  					B_array[i][j] = img[i][j][k] 
 
- 	# R = img[np.array(range(x)), np.array(range(y)), np.array(range(1))]
- 	# G = img[np.array(range(x)), np.array(range(y)), np.array(range(1, 2))]
- 	# B = img[np.array(range(x)), np.array(range(y)), np.array(range(2, 3))]
- 	# print "IN SPLIT RGB"
- 	# print str(R) + "R"
- 	# print str(G) + "G"
- 	# print str(B) + "B"
  	return [R_array,G_array,B_array]
 
 """Applies cross correlation to each channel in RGB"""
@@ -42,7 +35,6 @@ def RGB_recombine(channel_list):
 		for i in range(x):
 			for j in range(y):
 				new_image[i][j][c] = temp[i][j]
-	#new_array= np.concatenate(channel_list, axis = 2)
 	return new_image
 
 def cross_correlation_2d(img, kernel):
@@ -69,106 +61,6 @@ def cross_correlation_2d(img, kernel):
 		RGB_list = split_RGB(img)
 		RGB_cross = cross_correlation_RGB(RGB_list, kernel)
 		new_image = RGB_recombine(RGB_cross)
-		# (x, y, z) = img.shape
-		# new_image = np.zeros((x, y, z))
-		# up = (kern_m -1)/2
-		# out = (kern_n -1)/2
-		# for k in range(z):
-		# 	for i in range(x):
-		# 		for j in range(y):
-				
-					
-		# 			#kern_matrix_temp = kernel[row_idx_kern[:, None], col_idx_kern]
-		# 			#	kern_matrix = kern_matrix_temp[:, np.newaxis]
-				
-		# 			if (i-up<0 and j-out<0): #top left corner
-		# 				row_idx_dot = np.array(range(0, i+up+1))
-		# 				col_idx_dot = np.array(range(0, j+out+1))
-		# 				dot_matrix = img[row_idx_dot[:, None], col_idx_dot]
-		# 				row_idx_kern = np.array(range(abs(i-up), kern_m))
-		# 				col_idx_kern = np.array(range(abs(j-out), kern_n))
-		# 				kern_matrix = kernel[row_idx_kern[:, None], col_idx_kern]
-		# 				average = np.sum(dot_matrix[:,:,k]* kern_matrix)
-		# 				new_image[i][j][k] = average
-		
-		# 			elif (i-up<0 and j+out>=y): #top right corner
-		# 				row_idx_dot = np.array(range(0, i+up+1))
-		# 				col_idx_dot = np.array(range(j-out, y))
-		# 				dot_matrix = img[row_idx_dot[:, None], col_idx_dot]
-		# 				row_idx_kern = np.array(range(abs(i-up), kern_m))
-		# 				col_idx_kern = np.array(range(0, kern_n-((j+out)-(y-1))))
-		# 				kern_matrix = kernel[row_idx_kern[:, None], col_idx_kern]
-		# 				average = np.sum(dot_matrix[:,:,k]* kern_matrix)
-		# 				new_image[i][j][k] = average
-		# 				#   return #
-		
-		# 			elif (i+up>=x and j-out<0): #bottom left corner
-		# 				row_idx_dot = np.array(range(i-up, x))
-		# 				col_idx_dot = np.array(range(0, j+out+1))
-		# 				dot_matrix = img[row_idx_dot[:, None], col_idx_dot]
-		# 				row_idx_kern = np.array(range(0, kern_m-(i+up-(x-1))))
-		# 				col_idx_kern = np.array(range(abs(j-out), kern_n))
-		# 				kern_matrix = kernel[row_idx_kern[:, None], col_idx_kern]
-		# 				average = np.sum(dot_matrix[:,:,k]* kern_matrix)
-		# 				new_image[i][j] = average
-		
-		# 			elif (i+up>=x and j+out>=y): #bottom right corner
-		# 				row_idx_dot = np.array(range(i-up, x))
-		# 				col_idx_dot = np.array(range(j-out, y))
-		# 				dot_matrix = img[row_idx_dot[:, None], col_idx_dot]
-		# 				row_idx_kern = np.array(range(0, kern_m-(i+up-(x-1))))
-		# 				col_idx_kern = np.array(range(0, kern_n-(j+out-(y-1))))
-		# 				kern_matrix = kernel[row_idx_kern[:, None], col_idx_kern]
-		# 				average = np.sum(dot_matrix[:,:,k]* kern_matrix)
-		# 				new_image[i][j][k] = average
-		
-		# 			elif i-up<0: #top
-		# 				row_idx_dot = np.array(range(0, i+up+1))
-		# 				col_idx_dot = np.array(range(j-out, j+out+1))
-		# 				dot_matrix = img[row_idx_dot[:, None], col_idx_dot]
-		# 				row_idx_kern = np.array(range(abs(i-up), kern_m))
-		# 				col_idx_kern = np.array(range(0, kern_n))
-		# 				kern_matrix = kernel[row_idx_kern[:, None], col_idx_kern]
-		# 				average = np.sum(dot_matrix[:,:,k]* kern_matrix)
-		# 				new_image[i][j][k] = average
-		
-		# 			elif j-out<0: #left
-		# 				row_idx_dot = np.array(range(i-up, i+up+1))
-		# 				col_idx_dot = np.array(range(0, j+out+1))
-		# 				dot_matrix = img[row_idx_dot[:, None], col_idx_dot]
-		# 				row_idx_kern = np.array(range(0, kern_m))
-					# 	col_idx_kern = np.array(range(abs(j-out), kern_n))
-					# 	kern_matrix = kernel[row_idx_kern[:, None], col_idx_kern]
-					# 	average = np.sum(dot_matrix[:,:,k]* kern_matrix)
-					# 	new_image[i][j][k] = average
-		
-					# elif i+up>=x: #bottom
-					# 	row_idx_dot = np.array(range(i-up, x))
-					# 	col_idx_dot = np.array(range(j-out, j+out+1))
-					# 	dot_matrix = img[row_idx_dot[:, None], col_idx_dot]
-					# 	row_idx_kern = np.array(range(0, kern_m-(i+up-(x-1))))
-					# 	col_idx_kern = np.array(range(0, kern_n))
-					# 	kern_matrix = kernel[row_idx_kern[:, None], col_idx_kern]
-					# 	average = np.sum(dot_matrix[:,:,k]* kern_matrix)
-					# 	new_image[i][j][k] = average
-		
-					# elif j+out>=y: #right
-					# 	row_idx_dot = np.array(range(i-up, i+up+1))
-					# 	col_idx_dot = np.array(range(j-out, y))
-					# 	dot_matrix = img[row_idx_dot[:, None], col_idx_dot]
-					# 	row_idx_kern = np.array(range(0, kern_m))
-					# 	col_idx_kern = np.array(range(0, kern_n- (j+out-(y-1))))
-					# 	kern_matrix = kernel[row_idx_kern[:, None], col_idx_kern]
-					# 	average = np.sum(dot_matrix[:,:,k]* kern_matrix)
-					# 	new_image[i][j][k] = average
-		
-					# else:
-					# 	row_idx_dot = np.array(range(i-up, i+up+1))
-					# 	col_idx_dot = np.array(range(j-out, j+out+1))
-					# 	dot_matrix = img[row_idx_dot[:, None], col_idx_dot]
-					# 	average = np.sum(dot_matrix[:,:,k]* kernel)
-					# 	new_image[i][j][k] = average
-
 
 	else:
 		(x,y) = img.shape
@@ -177,15 +69,10 @@ def cross_correlation_2d(img, kernel):
 		out = (kern_n -1)/2
 		for i in range(x):
 			for j in range(y):
-				#dot_matrix = np.zeroes((kern_m, kern_n), dtype= int)
-				
 					if (i-up<0 and j-out<0): #top left corner
 						row_idx_dot = np.array(range(0, min([i+up+1, x])))
-						#row_idx_dot = np.array(range(0, i+up+1))
 						col_idx_dot = np.array(range(0, min([j+out+1, y])))
-						#col_idx_dot = np.array(range(0, j+out+1))
 						dot_matrix = img[row_idx_dot[:, None], col_idx_dot]
-						#dot_matrix = img[row_idx_dot, col_idx_dot]
 						#if matrix is too big
 						if (i+up<x):
 							row_idx_kern = np.array(range(abs(i-up), kern_m))
@@ -194,17 +81,13 @@ def cross_correlation_2d(img, kernel):
 						if (j+out<y):
 							col_idx_kern = np.array(range(abs(j-out), kern_n)) 
 						else:
-							#print "kernel is too big"
 							col_idx_kern = np.array(range(abs(j-out), kern_n-(j+out-y)-1))
-						#np.array(range(abs(j-out)), kern_n-(j+out-y))
 						kern_matrix = kernel[row_idx_kern[:, None], col_idx_kern]
 						average = np.sum(dot_matrix* kern_matrix)
 						new_image[i][j] = average
 
 					elif (i-up<0 and j+out>=y): #top right corner
 						row_idx_dot = np.array(range(0, min([i+up+1, x])))
-						#row_idx_dot = np.array(range(0, i+up+1))
-						#col_idx_dot = np.array(range(j-out, y))
 						col_idx_dot = np.array(range(max([j-out,0]), y))
 						dot_matrix = img[row_idx_dot[:, None], col_idx_dot]
 						#if matrix is too big
@@ -219,7 +102,6 @@ def cross_correlation_2d(img, kernel):
 						kern_matrix = kernel[row_idx_kern[:, None], col_idx_kern]
 						average = np.sum(dot_matrix* kern_matrix)
 						new_image[i][j] = average
-						#   return #
 
 					elif (i+up>=x and j-out<0): #bottom left corner
 						row_idx_dot = np.array(range(max([i-up,0]), x))
@@ -232,7 +114,6 @@ def cross_correlation_2d(img, kernel):
 						if (j+out<y):
 							col_idx_kern = np.array(range(abs(j-out), kern_n))
 						else:
-							#col_idx_kern = np.array(range(abs(j-out), kern_n))
 							col_idx_kern = np.array(range(abs(j-out), kern_n-(j+out-y)-1))
 						kern_matrix = kernel[row_idx_kern[:, None], col_idx_kern]
 						average = np.sum(dot_matrix* kern_matrix)
@@ -294,15 +175,7 @@ def cross_correlation_2d(img, kernel):
 						dot_matrix = img[row_idx_dot[:, None], col_idx_dot]
 						average = np.sum(dot_matrix* kernel)
 						new_image[i][j] = average
-
-	#print kernel
-	#print img
-	#print str(new_image)+"myimage"
-	#print str(new_image.shape) + "myimage shape"
 	return new_image
-
-
-
 	# TODO-BLOCK-END
 
 def convolve_2d(img, kernel):
@@ -347,15 +220,10 @@ def gaussian_blur_kernel_2d(sigma, width, height):
 	center_column = int(width/2) + 1 if width%2 == 1 else int(width/2)
 	for i in range(height):
 		for j in range(width):
-			#constant = 1/(2*np.pi*sigma**2)
 			val = np.exp(-1.0*
 				((i-(center_row-1))**2+((j-(center_column-1))**2))/(2*sigma**2))
 			kern[i][j] = val
 	s = np.sum(kern.flatten())
-
-
-	#divide the whole kernel by the sum of all the values
-	#print kern.shape
 	return np.transpose(kern/s)
 	
 
@@ -385,10 +253,6 @@ def high_pass(img, sigma, size):
 		Return an image of the same dimensions as the input image (same width,
 		height and the number of color channels)
 	'''
-	# TODO-BLOCK-BEGIN
-	#kern = np.transpose(gaussian_blur_kernel_2d(sigma, size, size))
-	
-	#print convolve_2d(img, kern)
 	return img - low_pass(img, sigma, size)
 	# TODO-BLOCK-END
 
